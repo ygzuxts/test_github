@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include <QStack>
+#include<QKeyEvent>
+#include<QMap>
+#include<QPushButton>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,11 +19,30 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-private slots :
-
+    QString operand;
+    QString opcode;
+    QStack<QString >operands;
+    QStack<QString >opcodes;
+    QMap<int, QPushButton *> digitbtns;
+    QString calculation(bool *ok = NULL);
+private slots:
     void btnnumclick();
 
 
+    void on_btnpoint_clicked();
+
+    void on_btndel_clicked();
+
+    void on_btnclear_clicked();
+
+    void btnbinaryOperatorClicked();
+
+    void on_btnequal_clicked();
+
+    void btnunaryOperatorClicked();
+    void on_btnclearall_clicked();
+
+    virtual void keyPressEvent(QKeyEvent *event);
 private:
     Ui::MainWindow *ui;
 };
